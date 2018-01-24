@@ -4,7 +4,6 @@ import robotgame.consoleview.ConsoleView;
 import robotgame.model.GameEngine;
 import robotgame.model.robotmodel.Robot;
 import robotgame.model.robotmodel.RobotPlayer;
-import robotgame.model.tablemodel.Position;
 import robotgame.model.tablemodel.Table;
 
 
@@ -30,14 +29,12 @@ public class GameController {
 
         if (player1 != null && player2 != null){
             
-            //Table table = new Table(Integer.parseInt(args[0]));
-            Table table = new Table(Integer.parseInt(args[0]), new Position(2, 2), new Position(3, 1));
+            Table table = new Table(Integer.parseInt(args[0]));
+            //Table table = new Table(Integer.parseInt(args[0]), new Position(3, 1), new Position(2, 2));
             GameEngine engine = new GameEngine(table, Integer.parseInt(args[3]), player1, player2);
             ConsoleView console = new ConsoleView();
-            console.renderTable(table,engine.getPlayer1(),engine.getPlayer2(),maxArmour);
-//            System.out.println(table.getPlayer1Position());
-//            System.out.println(table.getPlayer2Position());
-//            
+
+
             do{
                 console.renderTable(engine.playRound(),engine.getPlayer1(),
                         engine.getPlayer2(),maxArmour);

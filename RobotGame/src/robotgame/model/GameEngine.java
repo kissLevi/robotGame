@@ -57,7 +57,7 @@ public class GameEngine {
 
     public String getResultOfGame() {
         if(player1.dead() && player2.dead()){
-            return "Result: draw!\n";
+            return "Eredmény: döntetlen!\n";
         }
         else if(!player1.dead() && player2.dead()){
             return "Eredmény: "+ player1.getName() +" nyert!\n";
@@ -103,11 +103,11 @@ public class GameEngine {
                             table.setPlayer1Position(directionOfPlayer1Movement);
                         }
                         break;
+                    case DEFEND:
                     case STAY:
                         if(!table.getPlayer2Position().equals(directionOfPlayer1Movement)){
                             table.setPlayer1Position(directionOfPlayer1Movement);
                         }
-                        
                         break;
                 }
                 break;
@@ -146,7 +146,7 @@ public class GameEngine {
             case DEFEND:
                 switch (player2Event.getEventType()) {
                     case MOVE:
-                        if (!directionOfPlayer1Movement.equals(directionOfPlayer2Movement)) {
+                        if (!table.getPlayer1Position().equals(directionOfPlayer2Movement)) {
                             table.setPlayer2Position(directionOfPlayer2Movement);
                         }
                         break;

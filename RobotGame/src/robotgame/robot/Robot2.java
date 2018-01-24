@@ -17,7 +17,7 @@ public class Robot2 implements Robot{
 //        System.out.println(table.getOwnArmour());
 //        System.out.println(table.getOwnPosition());
 //        System.out.println(table.getTableSize());
-        return new Event(EventType.MOVE,Direction.UP);
+        return new Event(EventType.ATTACK,Direction.RIGHT);
     }
     
 }

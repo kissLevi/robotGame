@@ -21,15 +21,15 @@ public class Table {
     //are generated randomly.
     public Table(int tableSize) {
         Random randomNumber = new Random();
-        this.player1 = new Position(randomNumber.nextInt(tableSize),
-                randomNumber.nextInt(tableSize));
-        this.player2 = new Position(randomNumber.nextInt(tableSize),
-                randomNumber.nextInt(tableSize));
+        this.player1 = new Position(randomNumber.nextInt(tableSize)+1,
+                randomNumber.nextInt(tableSize)+1);
+        this.player2 = new Position(randomNumber.nextInt(tableSize)+1,
+                randomNumber.nextInt(tableSize)+1);
         //If the start positions are same we generate new start positions for 
         // player2.
         while (this.player1.equals(this.player2)) {
-            this.player2 = new Position(randomNumber.nextInt(tableSize),
-                    randomNumber.nextInt(tableSize));
+            this.player2 = new Position(randomNumber.nextInt(tableSize)+1,
+                    randomNumber.nextInt(tableSize)+1);
         }
         this.tableSize = tableSize;
     }
