@@ -1,10 +1,9 @@
 package robotgame.model.robotmodel;
 
 import robotgame.model.tablemodel.Event;
-import robotgame.model.tablemodel.Position;
 
 
-public class RobotPlayer {
+public class RobotPlayer{
 
     private final Robot robot;
     private final String name;
@@ -20,6 +19,11 @@ public class RobotPlayer {
     public int getArmour() {
         return this.armour;
     }
+    
+    public String getName(){
+        return this.name;
+    }
+    
 
     public void setArmour(int armour) {
         this.armour = armour;
@@ -33,8 +37,8 @@ public class RobotPlayer {
         return this.armour < 1;
     }
 
-    public Event makeStep(RobotPlayer enemy, Position enemyPosition, Position playerPosition, int tableSize) {
-        return this.robot.makeStep(TableInfo.getTableInfo(this, enemy, enemyPosition, playerPosition, tableSize));
+    public Event makeStep(TableInfo tableInfo) {
+        return this.robot.makeStep(tableInfo);
     }
     
     @Override

@@ -26,10 +26,12 @@ public class GameEngine {
     public Table playRound() {
         roundsPlayed++;
         numberOfRounds--;
-        Event player1Event = player1.makeStep(player2, table.getPlayer2Position(),
-                table.getPlayer1Position(), table.getTableSize());
-        Event player2Event = player2.makeStep(player1, table.getPlayer1Position(),
-                table.getPlayer2Position(), table.getTableSize());
+        Event player1Event = player1.makeStep(TableInfo.getTableInfo( 
+                player1,player2, table.getPlayer2Position(),
+                table.getPlayer1Position(), table.getTableSize()));
+        Event player2Event = player2.makeStep(TableInfo.getTableInfo(
+                player2,player1, table.getPlayer1Position(),
+                table.getPlayer2Position(), table.getTableSize()));
         updatePlayerData(player1Event, player2Event);
 
         return this.table;
@@ -38,33 +40,41 @@ public class GameEngine {
         return this.roundsPlayed;
     }
     
+    public RobotPlayer getPlayer1(){
+        return this.player1;
+    }
+    public RobotPlayer getPlayer2(){
+        return this.player2;
+    }
+    
     public boolean endOfGame() {
         return numberOfRounds < 1 || player1.dead() || player2.dead();
     }
     public TableInfo getTableInfo(){
-        return TableInfo.getTableInfo(player1, player1, table.getPlayer1Position(),
+        return TableInfo.getTableInfo(player1, player2, table.getPlayer1Position(),
                 table.getPlayer2Position(), table.getTableSize());
     }
 
     public String getResultOfGame() {
         if(player1.dead() && player2.dead()){
-            return "Result: draw!\n"
-                    + player1+"\n"
-                    + player2;
+            return "Result: draw!\n";
         }
-        if(!player1.dead() && player2.dead()){
-            return "Result: "+ player1 +"\nwon!\n"
-                    + player1+"\n"
-                    + player2;
+        else if(!player1.dead() && player2.dead()){
+            return "Eredmény: "+ player1.getName() +" nyert!\n";
         }
         else if(player1.dead() && !player2.dead()){
-            return "Result: "+ player2 +"\nwon!\n"
-                    + player1+"\n"
-                    + player2;
+            return "Eredmény: "+ player2.getName() +" nyert!\n";
         }
-        return "Result: draw!\n"
-                    + player1+"\n"
-                    + player2;
+        else if(!player1.dead() && !player2.dead()){
+            if(player1.getArmour()>player2.getArmour()){
+                return "Eredmény: "+ player1.getName() +" nyert!\n";
+            }
+            else if(player1.getArmour()<player2.getArmour()){
+                return "Eredmény: "+ player2.getName() +" nyert!\n";
+            }
+        }
+        
+        return "Eredmény: döntetlen!\n";
         
     }
 
@@ -171,6 +181,7 @@ public class GameEngine {
                 break;
 
         }
+        table.roundPlayed();
     }
 
     //Checks if step is possible. Step is possible if it's not outside of table.

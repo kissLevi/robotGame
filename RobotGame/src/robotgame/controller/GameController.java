@@ -22,22 +22,25 @@ public class GameController {
                     + "5: armour");
             System.exit(1);
         }
-        RobotPlayer player1 = getRobot(args[1], classLoader, Integer.parseInt(args[4]));
-        RobotPlayer player2 = getRobot(args[2], classLoader, Integer.parseInt(args[4]));
+        int maxArmour = Integer.parseInt(args[4]);
+        RobotPlayer player1 = getRobot(args[1], classLoader, maxArmour);
+        RobotPlayer player2 = getRobot(args[2], classLoader, maxArmour);
  
         
 
         if (player1 != null && player2 != null){
+            
             //Table table = new Table(Integer.parseInt(args[0]));
             Table table = new Table(Integer.parseInt(args[0]), new Position(2, 2), new Position(3, 1));
             GameEngine engine = new GameEngine(table, Integer.parseInt(args[3]), player1, player2);
             ConsoleView console = new ConsoleView();
-            console.renderTable(table,engine.getTableInfo());
+            console.renderTable(table,engine.getPlayer1(),engine.getPlayer2(),maxArmour);
 //            System.out.println(table.getPlayer1Position());
 //            System.out.println(table.getPlayer2Position());
 //            
             do{
-                console.renderTable(engine.playRound(),engine.getTableInfo());
+                console.renderTable(engine.playRound(),engine.getPlayer1(),
+                        engine.getPlayer2(),maxArmour);
             }while(!engine.endOfGame());
             System.out.println(engine.getResultOfGame());
 

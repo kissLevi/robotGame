@@ -7,12 +7,14 @@ public class Table {
     final private int tableSize;
     private Position player1;
     private Position player2;
+    private int roundCount;
 
     //Constructor witch takes tableSize and start position of players
     public Table(int tableSize, Position player1, Position player2) {
         this.tableSize = tableSize;
         this.player1 = player1;
         this.player2 = player2;
+        this.roundCount = 0;
     }
 
     //Constructor witch takes tableSize. In that case start positions of players
@@ -32,10 +34,17 @@ public class Table {
         this.tableSize = tableSize;
     }
 
+    public void roundPlayed(){
+        this.roundCount ++;
+    }
+    
     public int getTableSize() {
         return this.tableSize;
     }
 
+    public int getRoundCount(){
+        return this.roundCount;
+    }
     public Position getPlayer1Position() {
         return player1;
     }
@@ -50,6 +59,20 @@ public class Table {
 
     public void setPlayer2Position(Position player2) {
         this.player2.setPosition(player2); 
+    }
+    
+    private Position transformPosition(Position oldPosition, Direction direction) {
+        Position newPosition = oldPosition.transform(direction);
+
+        final Position MAXXMAXY = new Position(tableSize, tableSize);
+        final Position MINXMINY = new Position(1, 1);
+
+        //checks if the new position in the table
+        if (newPosition.compareInXAxis(MAXXMAXY) <= 0 && newPosition.compareInXAxis(MINXMINY) >= 0
+                && newPosition.compareInYAxis(MAXXMAXY) <= 0 && newPosition.compareInYAxis(MINXMINY) >= 0) {
+            return newPosition;
+        }
+        return oldPosition;
     }
     
 
