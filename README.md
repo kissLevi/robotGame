@@ -1,7 +1,7 @@
 # robotGame
 A program használata:
 GameController.java futtatása parancssorból. 5 paraméter megadása szükséges a következő sorrendben:
-1. a tábla mérete
+1. a tábla mérete\n
 2.-3. a robot osztályok neve
 4. körök száma
 5. páncél
